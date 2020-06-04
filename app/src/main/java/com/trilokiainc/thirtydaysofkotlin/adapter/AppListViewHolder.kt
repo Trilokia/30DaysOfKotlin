@@ -12,8 +12,8 @@ class AppListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bindView(appModel: AppModel) {
         itemView.textAppName.text = appModel.appName
-        itemView.textAppVersion.text = "Version: " + appModel.appVersion
-        itemView.textAppPkgName.text = "Package: " + appModel.appPackageName
+        itemView.textAppVersion.text = "Version: ${appModel.appVersion}"
+        itemView.textAppPkgName.text = "Package: ${appModel.appPackageName}"
 
         Glide.with(itemView.context).load(appModel.appIcon!!).into(itemView.imageAppIcon)
 

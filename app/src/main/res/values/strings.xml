@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">30DaysOfKotlin</string>
+    <string name="app_name">Privacy Policy Checker</string>
     <string name="no_privacy_policy">No privacy policy found</string>
     <string name="app_not_found">App is not available on Google Play</string>
     <string name="loading">Loading privacy policy</string>

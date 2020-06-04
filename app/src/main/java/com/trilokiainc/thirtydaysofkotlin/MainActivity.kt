@@ -4,11 +4,14 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
+import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.trilokiainc.thirtydaysofkotlin.adapter.AppListAdapter
@@ -40,7 +43,14 @@ class MainActivity : AppCompatActivity(){
         }
         recyclerView.adapter = appListAdapter
        // appListAdapter.setOnCallbackListener(this)
-        appListAdapter.setAppList(getInstalledAppsList())
+
+        Handler().postDelayed({
+            appListAdapter.setAppList(getInstalledAppsList())
+            progressHorizontal.visibility = View.INVISIBLE
+            recyclerView.visibility = View.VISIBLE
+        }, 150)
+
+
     }
 
 
@@ -106,7 +116,7 @@ class MainActivity : AppCompatActivity(){
         }).start()
     }
 
-    fun webTab(url: String){
+    private fun webTab(url: String){
         try {
             val uri = Uri.parse(url)
             // create an intent builder
