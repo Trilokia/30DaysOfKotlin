@@ -2,12 +2,12 @@ package com.trilokiainc.thirtydaysofkotlin.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.trilokiainc.thirtydaysofkotlin.MainActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.trilokiainc.thirtydaysofkotlin.R
 import com.trilokiainc.thirtydaysofkotlin.callback.RecycleViewCallback
 import com.trilokiainc.thirtydaysofkotlin.model.AppModel
 
-class AppListAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+class AppListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var listOfApps = mutableListOf<AppModel>()
 
@@ -15,13 +15,18 @@ class AppListAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<android
 
 
     private var recyclerViewCallback: RecycleViewCallback? = null
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
-        return AppListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_item_app,parent,false)).apply {
-            itemClick = { appName->
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return AppListViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.list_item_app, parent, false)
+        ).apply {
+            itemClick = { appName ->
                 this@AppListAdapter.itemClick?.invoke(appName)
             }
             itemView.setOnClickListener {
-                this@AppListAdapter.recyclerViewCallback?.onRecycleViewItemClick(listOfApps[adapterPosition], adapterPosition)
+                this@AppListAdapter.recyclerViewCallback?.onRecycleViewItemClick(
+                    listOfApps[adapterPosition],
+                    adapterPosition
+                )
             }
         }
 
@@ -29,7 +34,7 @@ class AppListAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<android
 
     override fun getItemCount(): Int = listOfApps.size
 
-    override fun onBindViewHolder(viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         val movieViewHolder = viewHolder as AppListViewHolder
         movieViewHolder.bindView(listOfApps[position])
     }
@@ -39,8 +44,8 @@ class AppListAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<android
         notifyDataSetChanged()
     }
 
-    fun setOnCallbackListener(recyclerViewCallback: MainActivity) {
-        this.recyclerViewCallback = recyclerViewCallback
-    }
+    /* fun setOnCallbackListener(recyclerViewCallback: MainActivity) {
+         this.recyclerViewCallback = recyclerViewCallback
+     }*/
 
 }

@@ -12,16 +12,14 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.trilokiainc.thirtydaysofkotlin.adapter.AppListAdapter
-import com.trilokiainc.thirtydaysofkotlin.callback.RecycleViewCallback
 import com.trilokiainc.thirtydaysofkotlin.model.AppModel
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jsoup.HttpStatusException
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
 import java.io.IOException
 
-class MainActivity : AppCompatActivity(), RecycleViewCallback {
+class MainActivity : AppCompatActivity(){
 
     private val TAG = MainActivity::class.java.simpleName
     private val gplayURL = "https://play.google.com/store/apps/details?id="
@@ -36,13 +34,12 @@ class MainActivity : AppCompatActivity(), RecycleViewCallback {
         recyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
         val appListAdapter = AppListAdapter().apply {
             itemClick = { listItem ->
-           Toast.makeText(this@MainActivity, "Checking privacy policy of $listItem", Toast.LENGTH_SHORT).show()
+           Toast.makeText(this@MainActivity, getString(R.string.loading), Toast.LENGTH_SHORT).show()
                 scrapPrivacyPolicyLink(listItem);
-
             }
         }
         recyclerView.adapter = appListAdapter
-        appListAdapter.setOnCallbackListener(this)
+       // appListAdapter.setOnCallbackListener(this)
         appListAdapter.setAppList(getInstalledAppsList())
     }
 
@@ -67,9 +64,9 @@ class MainActivity : AppCompatActivity(), RecycleViewCallback {
         }
         return listOfApp
     }
-       override fun onRecycleViewItemClick(appModel: AppModel, position: Int) {
+      /* override fun onRecycleViewItemClick(appModel: AppModel, position: Int) {
            Toast.makeText(this@MainActivity, appModel.appName,Toast.LENGTH_SHORT).show()
-    }
+    }*/
 
     /**
      * function for scraping privacy policy link from Google Play
@@ -96,13 +93,13 @@ class MainActivity : AppCompatActivity(), RecycleViewCallback {
                 runOnUiThread {
                     if(!url.isNullOrEmpty())
                         webTab(url!!)
-                    else  Toast.makeText(this@MainActivity, "No privacy policy found",Toast.LENGTH_SHORT).show() }
+                    else  Toast.makeText(this@MainActivity, getString(R.string.no_privacy_policy),Toast.LENGTH_SHORT).show() }
 
             } catch (e: IOException) {
                 e.printStackTrace()
                Log.d(TAG,"Error: "+e.message.toString())
                 runOnUiThread {
-                    Toast.makeText(this@MainActivity, "App is not available on Google Play",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, getString(R.string.app_not_found),Toast.LENGTH_SHORT).show()
                 }
             }
 
