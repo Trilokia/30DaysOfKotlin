@@ -15,7 +15,8 @@
         android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textAppName"
@@ -26,7 +27,8 @@
         android:textColor="@android:color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@id/imageAppIcon"
-        tools:text="Name" />
+        tools:text="Name"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textAppVersion"

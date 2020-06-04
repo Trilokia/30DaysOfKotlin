@@ -12,6 +12,8 @@ class AppListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bindView(appModel: AppModel) {
         itemView.textAppName.text = appModel.appName
+
+        //String template
         itemView.textAppVersion.text = "Version: ${appModel.appVersion}"
         itemView.textAppPkgName.text = "Package: ${appModel.appPackageName}"
 

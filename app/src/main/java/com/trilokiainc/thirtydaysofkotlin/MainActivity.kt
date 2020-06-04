@@ -25,7 +25,7 @@ import java.io.IOException
 class MainActivity : AppCompatActivity(){
 
     private val TAG = MainActivity::class.java.simpleName
-    private val gplayURL = "https://play.google.com/store/apps/details?id="
+    private val gPlayURL = "https://play.google.com/store/apps/details?id="
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity(){
         var url: String? =null
         Thread(Runnable {
             try {
-                val doc: Document = Jsoup.connect(gplayURL+packagename).get()
+                val doc: Document = Jsoup.connect(gPlayURL+packagename).get()
                 val mElementData: Elements = doc.select("div[class=IQ1z0d]")
                 val arr = mElementData.toString().split("<div>",ignoreCase = true, limit = 0)
                 for (a in arr) {
