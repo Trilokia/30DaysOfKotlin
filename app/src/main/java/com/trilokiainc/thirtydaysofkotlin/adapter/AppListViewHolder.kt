@@ -18,7 +18,7 @@ class AppListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         Glide.with(itemView.context).load(appModel.appIcon!!).into(itemView.imageAppIcon)
 
         itemView.setOnClickListener {
-            itemClick?.invoke(appModel.appName)
+            itemClick?.invoke(appModel.appPackageName)
         }
     }
 
